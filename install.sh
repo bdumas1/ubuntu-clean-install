@@ -8,7 +8,7 @@ set -o nounset
 
 # variables needed for the install
 email_address="dumasbenoit1@gmail.com"
-ssh_dir="~/.ssh"
+ssh_dir=~/.ssh
 onepassword_id_rsa="id_rsa - PERSO"
 onepassword_id_rsa_pub="id_rsa.pub - PERSO"
 dotfiles_repo="git@gitlab.com:Geetix/dotfiles.git"
@@ -59,18 +59,20 @@ download_op() {
 
 # GET 1password command line with update check
 get_op() {
-  op_version="0.10.0"
-  zip_filename="op_linux_amd64_v"$op_version".zip"
-  op_directory="op"
-
-  download_op https://cache.agilebits.com/dist/1P/op/pkg/v"$op_version"/"$zip_filename"
-
-  # Update op is necessary
-  if op update | grep -q 'is available'; then
-    op_version=$(op update | cut -f2 -d ' ')
+  if ! [ -x "$(command -v op)" ]; then
+    op_version="0.10.0"
     zip_filename="op_linux_amd64_v"$op_version".zip"
+    op_directory="op"
 
-    download_op https://cache.agilebits.com/dist/1P/op/pkg/v"$new_version"/"$zip_filename"
+    download_op https://cache.agilebits.com/dist/1P/op/pkg/v"$op_version"/"$zip_filename"
+
+    # Update op is necessary
+    if op update | grep -q 'is available'; then
+      op_version=$(op update | cut -f2 -d ' ')
+      zip_filename="op_linux_amd64_v"$op_version".zip"
+
+      download_op https://cache.agilebits.com/dist/1P/op/pkg/v"$new_version"/"$zip_filename"
+    fi
   fi
 }
 
@@ -89,20 +91,20 @@ op_off() {
 
 # Get ssh keys from 1password
 get_ssh_keys() {
-  sudo mkdir -p "$dirname"
+  sudo mkdir -p "$ssh_dir"
   sudo chmod 700 "$ssh_dir"
 
   get_op
 
-  ./op signin my.1password.com $email_address
+  op signin my.1password.com $email_address
 
   op_on
 
   # Get public/private keys
-  ./op get document "$onepassword_id_rsa" > id_rsa
-  ./op get document "$onepassword_id_rsa_pub" > id_rsa.pub
-  mv id_rsa ~/.ssh/id_rsa
-  mv id_rsa.pub ~/.ssh/id_rsa.pub
+  op get document "$onepassword_id_rsa" > id_rsa
+  op get document "$onepassword_id_rsa_pub" > id_rsa.pub
+  mv id_rsa "$ssh_dir"/id_rsa
+  mv id_rsa.pub "$ssh_dir"/id_rsa.pub
   cd $ssh_dir
   chmod 600 id_rsa
   chmod 600 id_rsa.pub
@@ -173,8 +175,8 @@ init() {
   sudo apt upgrade -y
 
   get_ssh_keys
-  get_dotfiles
   install_programs
+  get_dotfiles
   change_shell_to_zsh
   update_hosts_file
 }
