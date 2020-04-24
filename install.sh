@@ -92,7 +92,7 @@ get_ssh_keys() {
   sudo mkdir -p "$ssh_dir"
   sudo chmod 700 "$ssh_dir"
 
-  if ![ -f "$ssh_dir"/id_rsa ] && ![ -f "$ssh_dir"/id_rsa.pub ]; then
+  if [ ! -f "$ssh_dir"/id_rsa ] && [ ! -f "$ssh_dir"/id_rsa.pub ]; then
     get_op
 
     op signin my.1password.com $email_address
