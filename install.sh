@@ -78,9 +78,7 @@ get_op() {
 
 # Sign in to 1password command line
 op_on() {
-  if [[ -z $OP_SESSION_my ]]; then
-    eval $(op signin my)
-  fi
+  eval $(op signin my)
 }
 
 # Sign out to 1password command line
