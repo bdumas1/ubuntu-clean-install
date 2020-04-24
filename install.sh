@@ -37,7 +37,7 @@ PROGRAMS=(
   "terminator"
   "gnome-tweak-tool"
   "slack"
-  "spotify"
+  "spotify-client"
   "nextcloud-client"
   "nextcloud-client-nautilus"
 )
@@ -92,22 +92,24 @@ get_ssh_keys() {
   sudo mkdir -p "$ssh_dir"
   sudo chmod 700 "$ssh_dir"
 
-  get_op
+  if ![ -f "$ssh_dir"/id_rsa ] && ![ -f "$ssh_dir"/id_rsa.pub ]; then
+    get_op
 
-  op signin my.1password.com $email_address
+    op signin my.1password.com $email_address
 
-  op_on
+    op_on
 
-  # Get public/private keys
-  op get document "$onepassword_id_rsa" > id_rsa
-  op get document "$onepassword_id_rsa_pub" > id_rsa.pub
-  mv id_rsa "$ssh_dir"/id_rsa
-  mv id_rsa.pub "$ssh_dir"/id_rsa.pub
-  cd $ssh_dir
-  chmod 600 id_rsa
-  chmod 600 id_rsa.pub
+    # Get public/private keys
+    op get document "$onepassword_id_rsa" > id_rsa
+    op get document "$onepassword_id_rsa_pub" > id_rsa.pub
+    mv id_rsa "$ssh_dir"/id_rsa
+    mv id_rsa.pub "$ssh_dir"/id_rsa.pub
+    cd $ssh_dir
+    chmod 600 id_rsa
+    chmod 600 id_rsa.pub
 
-  op_off
+    op_off
+  fi
 }
 
 # Get dotfiles and install them
@@ -123,9 +125,10 @@ get_dotfiles() {
 # Install programs
 install_programs() {
   # Slack deb
-  echo "deb https://packagecloud.io/slacktechnologies/slack/debian/ jessie main" | sudo tee /etc/apt/sources.list.d/slack.list >/dev/null
+  curl -s https://packagecloud.io/install/repositories/slacktechnologies/slack/script.deb.sh | sudo bash
 
   # Spotify deb
+  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4E9CFF4E
   echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list >/dev/null
 
   # Nextcloud deb
