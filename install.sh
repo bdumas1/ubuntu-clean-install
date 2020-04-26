@@ -45,11 +45,6 @@ SNAP_CLASSIC=(
   "code"
   "slack"
 )
-HOSTS_FILE_ROWS=(
-  "127.0.0.1      money.localhost"
-  "192.168.1.26   dsm.bdumas.com"
-  "51.15.229.193  bdumas"
-)
 
 # Download 1password command line (op) and move it to PATH
 download_op() {
@@ -189,9 +184,9 @@ change_shell_to_zsh() {
 
 # Add rules to hosts file
 update_hosts_file() {
-  for row in "${HOSTS_FILE_ROWS[@]}"; do
-    sudo sed -i \""$row"\" /etc/hosts
-  done
+  ./manage-etc-hosts money.localhost 127.0.0.1
+  ./manage-etc-hosts dsm.bdumas.com 192.168.1.26
+  ./manage-etc-hosts bdumas 51.15.229.193
 }
 
 init() {
