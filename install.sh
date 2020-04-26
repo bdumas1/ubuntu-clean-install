@@ -128,8 +128,6 @@ get_dotfiles() {
 
 remove_sources_list_files() {
   FILES=(
-    "/etc/apt/sources.list.d/slack.list"
-    "/etc/apt/sources.list.d/slack.list.save"
     "/etc/apt/sources.list.d/spotify.list"
     "/etc/apt/sources.list.d/spotify.list.save"
   )
