@@ -188,7 +188,7 @@ change_shell_to_zsh() {
 # Add rules to hosts file
 update_hosts_file() {
   for row in "${HOSTS_FILE_ROWS[@]}"; do
-    sudo sed -i "$row" /etc/hosts
+    sudo sed -i \""$row"\" /etc/hosts
   done
 }
 
