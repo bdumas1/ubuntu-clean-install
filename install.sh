@@ -119,8 +119,10 @@ get_ssh_keys() {
 # Get dotfiles and install them
 get_dotfiles() {
   dotfiles_folder="dotfiles"
+  lab_folder=~/Lab
 
-  mkdir -p ~/Lab
+  mkdir -p "$lab_folder"
+  cd "$lab_folder"
   git clone $dotfiles_repo $dotfiles_folder
   cd $dotfiles_folder
   ./install
