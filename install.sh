@@ -122,14 +122,29 @@ get_dotfiles() {
   ./install
 }
 
+remove_sources_list_files() {
+  FILES=(
+    "/etc/apt/sources.list.d/slack.list"
+    "/etc/apt/sources.list.d/slack.list.save"
+    "/etc/apt/sources.list.d/spotify.list"
+    "/etc/apt/sources.list.d/spotify.list.save"
+  )
+
+  for file in "${FILES[@]}"; do
+    [ -f file ] && rm -rf "$file"
+  done
+}
+
 # Install programs
 install_programs() {
+  remove_sources_list_files
+
   # Slack deb
   curl -s https://packagecloud.io/install/repositories/slacktechnologies/slack/script.deb.sh | sudo bash
 
   # Spotify deb
-  sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4E9CFF4E
-  echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list >/dev/null
+  curl -sS https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add - 
+  echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
 
   # Nextcloud deb
   sudo add-apt-repository ppa:nextcloud-devs/client
