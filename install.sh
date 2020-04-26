@@ -137,8 +137,6 @@ remove_sources_list_files() {
 
 # Install programs
 install_programs() {
-  remove_sources_list_files
-
   # Slack deb
   curl -s https://packagecloud.io/install/repositories/slacktechnologies/slack/script.deb.sh | sudo bash
 
@@ -187,6 +185,8 @@ update_hosts_file() {
 }
 
 init() {
+  remove_sources_list_files
+
   sudo apt update -y
   sudo apt upgrade -y
 
