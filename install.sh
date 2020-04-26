@@ -131,7 +131,7 @@ remove_sources_list_files() {
   )
 
   for file in "${FILES[@]}"; do
-    [ -f file ] && rm -rf "$file"
+    [ -f "$file" ] && rm -rf "$file"
   done
 }
 
