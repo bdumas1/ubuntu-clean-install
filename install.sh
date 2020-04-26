@@ -131,7 +131,9 @@ remove_sources_list_files() {
   )
 
   for file in "${FILES[@]}"; do
-    [ -f "$file" ] && sudo rm -rf "$file"
+    if [ -f "$file" ]; then
+      sudo rm -rf "$file"
+    fi
   done
 }
 
