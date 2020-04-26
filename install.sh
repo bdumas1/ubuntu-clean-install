@@ -121,11 +121,13 @@ get_dotfiles() {
   dotfiles_folder="dotfiles"
   lab_folder=~/Lab
 
-  mkdir -p "$lab_folder"
-  cd "$lab_folder"
-  git clone $dotfiles_repo $dotfiles_folder
-  cd $dotfiles_folder
-  ./install
+  if [ ! -d "$lab_folder"/"$dotfiles_folder" ]; then
+    mkdir -p "$lab_folder"
+    cd "$lab_folder"
+    git clone $dotfiles_repo $dotfiles_folder
+    cd $dotfiles_folder
+    ./install
+  fi
 }
 
 remove_sources_list_files() {
