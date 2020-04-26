@@ -139,7 +139,7 @@ remove_sources_list_files() {
 
 # Install programs
 install_programs() {
-  sudo apt install curl
+  sudo apt install curl -y
 
   # Slack deb
   curl -s https://packagecloud.io/install/repositories/slacktechnologies/slack/script.deb.sh | sudo bash
