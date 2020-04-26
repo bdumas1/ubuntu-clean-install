@@ -184,9 +184,11 @@ change_shell_to_zsh() {
 
 # Add rules to hosts file
 update_hosts_file() {
-  ./manage-etc-hosts money.localhost 127.0.0.1
-  ./manage-etc-hosts dsm.bdumas.com 192.168.1.26
-  ./manage-etc-hosts bdumas 51.15.229.193
+  sudo chmod 744 ./manage-etc-hosts.sh
+
+  ./manage-etc-hosts.sh add money.localhost 127.0.0.1
+  ./manage-etc-hosts.sh add dsm.bdumas.com 192.168.1.26
+  ./manage-etc-hosts.sh add bdumas 51.15.229.193
 }
 
 init() {
