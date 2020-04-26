@@ -41,6 +41,10 @@ PROGRAMS=(
   "nextcloud-client"
   "nextcloud-client-nautilus"
 )
+SNAP_CLASSIC=(
+  "code"
+  "slack"
+)
 HOSTS_FILE_ROWS=(
   "127.0.0.1      money.localhost"
   "192.168.1.26   dsm.bdumas.com"
@@ -141,9 +145,6 @@ remove_sources_list_files() {
 install_programs() {
   sudo apt install curl -y
 
-  # Slack deb
-  curl -s https://packagecloud.io/install/repositories/slacktechnologies/slack/script.deb.sh | sudo bash
-
   # Spotify deb
   curl -sS https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add - 
   echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
@@ -161,13 +162,18 @@ install_programs() {
     echo "$program installed"
   done
 
+  for snap in "${SNAP_CLASSIC[@]}"; do
+    echo "Installing "$snap"... via snap"
+
+    sudo snap install "$snap" --classic
+
+    echo "$snap installed via snap"
+  done
+
   killall nautilus
 
   # Install NVM
   wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
-
-  # Install VSCode
-  sudo snap install code --classic
 }
 
 # Set ZSH to default shell
