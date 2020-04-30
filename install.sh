@@ -36,7 +36,6 @@ PROGRAMS=(
   
   "terminator"
   "gnome-tweak-tool"
-  "slack"
   "spotify-client"
   "nextcloud-client"
   "nextcloud-client-nautilus"
