@@ -41,6 +41,9 @@ PROGRAMS=(
   "nextcloud-client"
   "nextcloud-client-nautilus"
 )
+SNAP=(
+  "zoom-client"
+)
 SNAP_CLASSIC=(
   "code"
   "slack"
@@ -158,6 +161,15 @@ install_programs() {
 
     echo "$program installed"
   done
+
+  for snap in "${SNAP[@]}"; do
+    echo "Installing "$snap"... via snap"
+
+    sudo snap install "$snap"
+
+    echo "$snap installed via snap"
+  done
+
 
   for snap in "${SNAP_CLASSIC[@]}"; do
     echo "Installing "$snap"... via snap"
