@@ -1,4 +1,4 @@
-#!/usr/bin/env
+#!/usr/bin/env bash
 
 # Exit when a command fails
 set -o errexit
@@ -12,80 +12,18 @@ ssh_dir=~/.ssh
 onepassword_id_rsa="id_rsa - PERSO"
 onepassword_id_rsa_pub="id_rsa.pub - PERSO"
 dotfiles_repo="git@gitlab.com:Geetix/dotfiles.git"
-PROGRAMS=(
-  "zsh"
-  "vim"
-  "git"
-  "wget"
-  "rsync"
-  "zip"
 
-  "apache2"
-  "php"
-  "libapache2-mod-php"
-  "mysql-server"
-  "php-mysql"
+init() {
+  remove_sources_list_files
 
-  "php-curl"
-  "php-gd"
-  "php-intl"
-  "php-json"
-  "php-mbstring"
-  "php-xml"
-  "php-zip"
-  
-  "terminator"
-  "gnome-tweak-tool"
-  "spotify-client"
-  "nextcloud-client"
-  "nextcloud-client-nautilus"
-)
-SNAP=(
-  "zoom-client"
-)
-SNAP_CLASSIC=(
-  "code"
-  "slack"
-)
+  sudo apt update -y
+  sudo apt upgrade -y
 
-# Download 1password command line (op) and move it to PATH
-download_op() {
-  wget $1
-  unzip -d $op_directory $zip_filename
-  rm $zip_filename
-  cd $op_directory
-  sudo mv op /usr/local/bin
-  rm -rf $op_directory
-}
-
-# GET 1password command line with update check
-get_op() {
-  if ! [ -x "$(command -v op)" ]; then
-    op_version="0.10.0"
-    zip_filename="op_linux_amd64_v"$op_version".zip"
-    op_directory="op"
-
-    download_op https://cache.agilebits.com/dist/1P/op/pkg/v"$op_version"/"$zip_filename"
-
-    # Update op is necessary
-    if op update | grep -q 'is available'; then
-      op_version=$(op update | cut -f2 -d ' ')
-      zip_filename="op_linux_amd64_v"$op_version".zip"
-
-      download_op https://cache.agilebits.com/dist/1P/op/pkg/v"$new_version"/"$zip_filename"
-    fi
-  fi
-}
-
-# Sign in to 1password command line
-op_on() {
-  eval $(op signin my)
-}
-
-# Sign out to 1password command line
-op_off() {
-  op signout
-  unset OP_SESSION_my
+  get_ssh_keys
+  install_programs
+  get_dotfiles
+  change_shell_to_zsh
+  update_hosts_file
 }
 
 # Get ssh keys from 1password
@@ -94,11 +32,11 @@ get_ssh_keys() {
   sudo chmod 700 "$ssh_dir"
 
   if [ ! -f "$ssh_dir"/id_rsa ] && [ ! -f "$ssh_dir"/id_rsa.pub ]; then
-    get_op
+    ./op get_op
 
     op signin my.1password.com $email_address
 
-    op_on
+    ./op op_on
 
     # Get public/private keys
     op get document "$onepassword_id_rsa" > id_rsa
@@ -109,7 +47,7 @@ get_ssh_keys() {
     chmod 600 id_rsa
     chmod 600 id_rsa.pub
 
-    op_off
+    ./op op_off
   fi
 }
 
@@ -127,6 +65,7 @@ get_dotfiles() {
   fi
 }
 
+# Remove some sources list files if exists
 remove_sources_list_files() {
   FILES=(
     "/etc/apt/sources.list.d/spotify.list"
@@ -142,41 +81,8 @@ remove_sources_list_files() {
 
 # Install programs
 install_programs() {
-  sudo apt install curl -y
-
-  # Spotify deb
-  curl -sS https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add - 
-  echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
-
-  # Nextcloud deb
-  sudo add-apt-repository ppa:nextcloud-devs/client
-
-  sudo apt update -y
-
-  for program in "${PROGRAMS[@]}"; do
-    echo "Installing "$program"..."
-
-    sudo apt install "$program" -y
-
-    echo "$program installed"
-  done
-
-  for snap in "${SNAP[@]}"; do
-    echo "Installing "$snap"... via snap"
-
-    sudo snap install "$snap"
-
-    echo "$snap installed via snap"
-  done
-
-
-  for snap in "${SNAP_CLASSIC[@]}"; do
-    echo "Installing "$snap"... via snap"
-
-    sudo snap install "$snap" --classic
-
-    echo "$snap installed via snap"
-  done
+  ./programs/apt_install
+  ./programs/snap_install
 
   # Install NVM
   wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
@@ -202,17 +108,4 @@ update_hosts_file() {
   ./manage-etc-hosts.sh add bdumas 51.15.229.193
 }
 
-init() {
-  remove_sources_list_files
-
-  sudo apt update -y
-  sudo apt upgrade -y
-
-  get_ssh_keys
-  install_programs
-  get_dotfiles
-  change_shell_to_zsh
-  update_hosts_file
-}
-
-init
+init "$@"

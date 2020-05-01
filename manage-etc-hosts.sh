@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# source: https://gist.github.com/irazasyed/a7b0a079e7727a4315b9
+
 # Path to your hosts file
 hostsFile="/etc/hosts"
 
