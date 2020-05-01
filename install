@@ -14,6 +14,12 @@ onepassword_id_rsa_pub="id_rsa.pub - PERSO"
 dotfiles_repo="git@gitlab.com:Geetix/dotfiles.git"
 
 init() {
+  sudo chmod 744 ./manage-etc-hosts
+  sudo chmod 744 ./op
+  sudo chmod 744 ./success
+  sudo chmod 744 ./programs/apt_install
+  sudo chmod 744 ./programs/snap_install
+
   remove_sources_list_files
 
   sudo apt update -y
@@ -43,12 +49,13 @@ get_ssh_keys() {
     op get document "$onepassword_id_rsa_pub" > id_rsa.pub
     mv id_rsa "$ssh_dir"/id_rsa
     mv id_rsa.pub "$ssh_dir"/id_rsa.pub
-    cd $ssh_dir
-    chmod 600 id_rsa
-    chmod 600 id_rsa.pub
+    chmod 600 "$ssh_dir"/id_rsa
+    chmod 600 "$ssh_dir"/id_rsa.pub
 
     ./op op_off
   fi
+
+  ./success "SSH Keys have been installed."
 }
 
 # Get dotfiles and install them
@@ -58,11 +65,13 @@ get_dotfiles() {
 
   if [ ! -d "$lab_folder"/"$dotfiles_folder" ]; then
     mkdir -p "$lab_folder"
-    cd "$lab_folder"
-    git clone $dotfiles_repo $dotfiles_folder
+    git clone $dotfiles_repo "$lab_folder"/"$dotfiles_folder"
     cd $dotfiles_folder
     ./install
+    cd -
   fi
+
+  ./success "Dotfiles have been installed."
 }
 
 # Remove some sources list files if exists
@@ -85,27 +94,27 @@ install_programs() {
   ./programs/snap_install
 
   # Install NVM
-  wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+  wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install | bash
 }
 
 # Set ZSH to default shell
 change_shell_to_zsh() {
-  echo "Changing shell to ZSH..."
+  ./success "Changing shell to ZSH..."
 
   chsh -s $(which zsh)
-  echo "Shell is set to ZSH for $(whoami)"
+  ./success "Shell is set to ZSH for $(whoami)"
 
   sudo chsh -s $(which zsh)
-  echo "Shell is set to ZSH for root"
+  ./success "Shell is set to ZSH for root"
 }
 
 # Add rules to hosts file
 update_hosts_file() {
-  sudo chmod 744 ./manage-etc-hosts.sh
+  ./manage-etc-hosts add money.localhost 127.0.0.1
+  ./manage-etc-hosts add dsm.bdumas.com 192.168.1.26
+  ./manage-etc-hosts add bdumas 51.15.229.193
 
-  ./manage-etc-hosts.sh add money.localhost 127.0.0.1
-  ./manage-etc-hosts.sh add dsm.bdumas.com 192.168.1.26
-  ./manage-etc-hosts.sh add bdumas 51.15.229.193
+  ./success "All hostnames have been installed."
 }
 
 init "$@"

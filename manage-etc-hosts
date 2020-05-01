@@ -32,8 +32,7 @@ add() {
         try printf "%s\t%s\n" "$ip" "$hostname" | sudo tee -a "$hostsFile" > /dev/null;
 
         if [ -n "$(grep $hostname /etc/hosts)" ]; then
-            echo "$hostname was added succesfully:";
-            echo "$(grep $hostname /etc/hosts)";
+            ./success "$hostname was added succesfully:";
         else
             die "Failed to add $hostname";
         fi

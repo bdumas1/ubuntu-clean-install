@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 install() {
-  echo "Installing via snap: "$1"..."
+  ../success "Installing via snap: "$1"..."
   sudo snap install "$1" $2
+  ../success "Installed: ${1}"
 }
 
 install zoom-client
