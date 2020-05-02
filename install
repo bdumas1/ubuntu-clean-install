@@ -14,7 +14,7 @@ onepassword_id_rsa_pub="id_rsa.pub - PERSO"
 dotfiles_repo="git@gitlab.com:Geetix/dotfiles.git"
 
 init() {
-  sudo chmod 744 ./*
+  sudo chmod -R 744 ./*
 
   remove_sources_list_files
 
