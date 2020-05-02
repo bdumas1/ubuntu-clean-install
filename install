@@ -53,9 +53,11 @@ get_ssh_keys() {
     chmod 600 "$ssh_dir"/id_rsa.pub
 
     ./op op_off
-  fi
 
-  ./success "SSH Keys have been installed."
+    ./success "SSH Keys have been installed."
+  else
+    ./success "SSH Keys already exist."
+  fi
 }
 
 # Get dotfiles and install them

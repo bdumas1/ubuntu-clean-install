@@ -6,9 +6,9 @@ install() {
   if [ $? -ne 0 ]; then
     ../success "Installing: ${1}..."
     sudo apt install -y $1
-    ../success "Installed: ${1}"
+    ./success "Installed: ${1}"
   else
-    ../success "Already installed: ${1}"
+    ./success "Already installed: ${1}"
   fi
 }
 
