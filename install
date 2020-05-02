@@ -14,11 +14,7 @@ onepassword_id_rsa_pub="id_rsa.pub - PERSO"
 dotfiles_repo="git@gitlab.com:Geetix/dotfiles.git"
 
 init() {
-  sudo chmod 744 ./manage-etc-hosts
-  sudo chmod 744 ./op
-  sudo chmod 744 ./success
-  sudo chmod 744 ./programs/apt_install
-  sudo chmod 744 ./programs/snap_install
+  sudo chmod 744 ./*
 
   remove_sources_list_files
 
