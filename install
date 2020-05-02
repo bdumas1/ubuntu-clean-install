@@ -24,6 +24,7 @@ init() {
   get_ssh_keys
   install_programs
   get_dotfiles
+  ./set_gnome_tweaks_settings
   change_shell_to_zsh
   update_hosts_file
 }
