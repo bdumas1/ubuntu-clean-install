@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
 install() {
-  ./success "Installing via snap: "$1"..."
-  sudo snap install "$1" $2
-  ./success "Installed: ${1}"
+ snap list $1 &> /dev/null
+
+  if [ $? -ne 0 ]; then
+    ./success "Installing via snap: "$1"..."
+    sudo snap install "$1" $2
+    ./success "Installed: ${1}"
+  else
+    ./success "Already installed: ${1}"
+  fi
 }
 
 install zoom-client
