@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 gsettings set org.gnome.desktop.interface show-battery-percentage true
 gsettings set org.gnome.desktop.interface clock-show-date true
 gsettings set org.gnome.desktop.interface gtk-enable-primary-paste false
@@ -10,3 +11,5 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dock-position 'BOTTOM'
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 40
 
 gsettings set org.gnome.desktop.session idle-delay 'uint32 0'
+
+./success "All gnome tweaks settings have been installed."
