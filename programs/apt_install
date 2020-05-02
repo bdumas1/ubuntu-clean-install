@@ -4,7 +4,7 @@ install() {
   which $1 &> /dev/null
 
   if [ $? -ne 0 ]; then
-    ../success "Installing: ${1}..."
+    ./success "Installing: ${1}..."
     sudo apt install -y $1
     ./success "Installed: ${1}"
   else
