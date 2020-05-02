@@ -46,7 +46,7 @@ install php-zip
 
 # Apps
 install terminator
-install gnome-tweak-tool
+install gnome-tweaks
 install spotify-client
 install nextcloud-client
 install nextcloud-client-nautilus
