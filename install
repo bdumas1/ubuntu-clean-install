@@ -11,7 +11,7 @@ email_address="dumasbenoit1@gmail.com"
 ssh_dir=~/.ssh
 onepassword_id_rsa="id_rsa - PERSO"
 onepassword_id_rsa_pub="id_rsa.pub - PERSO"
-dotfiles_repo="git@gitlab.com:Geetix/dotfiles.git"
+dotfiles_repo="git@github.com:bdumas1/dotfiles.git"
 
 init() {
   sudo chmod -R 744 ./*
