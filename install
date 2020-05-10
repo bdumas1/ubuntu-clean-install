@@ -14,61 +14,17 @@ init() {
   sudo apt update -y
   sudo apt upgrade -y
 
-  get_ssh_keys
+  ./actions/get_ssh_keys
   install_programs
-  get_dotfiles
-  ./set_gnome_tweaks_settings
-  change_shell_to_zsh
-  update_hosts_file
+  ./actions/get_dotfiles
+  ./actions/set_gnome_tweaks_settings
+  ./actions/change_shell_to_zsh
+  ./actions/update_hosts_file
 }
 
 # Get ssh keys from 1password
 get_ssh_keys() {
-  ssh_dir=~/.ssh
-
-  sudo mkdir -p "$ssh_dir"
-  sudo chmod 700 "$ssh_dir"
-
-  if [ ! -f $ssh_dir/id_rsa ] && [ ! -f $ssh_dir/id_rsa.pub ]; then
-    ./op get_op
-
-    read -p "What's your 1password account email address : " email_address
-
-    op signin my.1password.com $email_address
-
-    ./op op_on
-
-    # Get public/private keys
-    read -p "What's the document name of 'id_rsa' you want to get from 1password : " $onepassword_id_rsa
-    read -p "What's the document name of 'id_rsa.pub' you want to get from 1password : " $onepassword_id_rsa_pub
-    op get document $onepassword_id_rsa > $ssh_dir/id_rsa
-    op get document $onepassword_id_rsa_pub > $ssh_dir/id_rsa.pub
-    chmod 600 $ssh_dir/id_rsa
-    chmod 600 $ssh_dir/id_rsa.pub
-
-    ./op op_off
-
-    ./success "SSH Keys have been installed."
-  else
-    ./success "SSH Keys already exist."
-  fi
-}
-
-# Get dotfiles and install them
-get_dotfiles() {
-  dotfiles_repo="git@github.com:bdumas1/dotfiles.git"
-  dotfiles_folder="dotfiles"
-  lab_folder=~/Lab
-
-  if [ ! -d "$lab_folder"/"$dotfiles_folder" ]; then
-    mkdir -p "$lab_folder"
-    git clone $dotfiles_repo "$lab_folder"/"$dotfiles_folder"
-    cd $dotfiles_folder
-    ./install
-    cd -
-  fi
-
-  ./success "Dotfiles have been installed."
+  
 }
 
 # Remove some sources list files if exists
@@ -87,31 +43,11 @@ remove_sources_list_files() {
 
 # Install programs
 install_programs() {
-  ./programs/apt_install
-  ./programs/snap_install
+  ./actions/programs/apt_install
+  ./actions/programs/snap_install
 
   # Install NVM
   wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install | bash
-}
-
-# Set ZSH to default shell
-change_shell_to_zsh() {
-  ./success "Changing shell to ZSH..."
-
-  chsh -s $(which zsh)
-  ./success "Shell is set to ZSH for $(whoami)"
-
-  sudo chsh -s $(which zsh)
-  ./success "Shell is set to ZSH for root"
-}
-
-# Add rules to hosts file
-update_hosts_file() {
-  ./manage-etc-hosts add money.localhost 127.0.0.1
-  ./manage-etc-hosts add dsm.bdumas.com 192.168.1.26
-  ./manage-etc-hosts add bdumas 51.15.229.193
-
-  ./success "All hostnames have been installed."
 }
 
 init "$@"

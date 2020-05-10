@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+while true;
+do
+  read -r -p "Do you want to add '/etc/hosts' entry? [y/n]" response
+
+  if [[ $response =~ ^([yY][eE][sS]|[yY])$ ]]
+  then
+    read -r -p "Enter the entry to add: " entry
+    ./bin/manage-etc-hosts add $entry
+    ./bin/success "Your entry has been installed."
+  else
+    exit 0
+  fi
+done
