@@ -22,11 +22,6 @@ init() {
   ./actions/update_hosts_file
 }
 
-# Get ssh keys from 1password
-get_ssh_keys() {
-  
-}
-
 # Remove some sources list files if exists
 remove_sources_list_files() {
   FILES=(
