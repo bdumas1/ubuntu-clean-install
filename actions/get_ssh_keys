@@ -13,7 +13,8 @@ if [ ! -f $ssh_dir/id_rsa ] && [ ! -f $ssh_dir/id_rsa.pub ]; then
 
   op signin my.1password.com "$email_address"
 
-  ./bin/op op_on
+  #./bin/op op_on
+  eval $(op signin my)
 
   # Get public/private keys
   read -p "What's the document name of 'id_rsa' you want to get from 1password: " onepassword_id_rsa
