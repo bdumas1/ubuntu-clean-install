@@ -4,6 +4,7 @@ ssh_dir=~/.ssh
 
 sudo mkdir -p "$ssh_dir"
 sudo chmod 700 "$ssh_dir"
+sudo chown $(whoami) "$ssh_dir" 
 
 if [ ! -f $ssh_dir/id_rsa ] && [ ! -f $ssh_dir/id_rsa.pub ]; then
   ./bin/op get_op
