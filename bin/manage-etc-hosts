@@ -6,10 +6,10 @@
 hostsFile="/etc/hosts"
 
 # Default IP address for host
-ip="$3"
+ip="$2"
 
 # Hostname to add/remove.
-hostname="$2"
+hostname="$3"
 
 yell() { echo "$0: $*" >&2; }
 die() { yell "$*"; exit 111; }
