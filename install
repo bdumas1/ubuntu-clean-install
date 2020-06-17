@@ -7,8 +7,6 @@ set -o errexit
 set -o nounset
 
 init() {
-  sudo chmod -R 744 ./*
-
   remove_sources_list_files
 
   sudo apt update -y
