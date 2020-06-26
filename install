@@ -11,8 +11,8 @@ init() {
 
   sudo apt update -y
   sudo apt upgrade -y
-
-  ./actions/get_ssh_keys
+  
+  get_ssh_keys
   install_programs
   ./actions/get_dotfiles
   ./actions/set_gnome_tweaks_settings
@@ -32,6 +32,17 @@ remove_sources_list_files() {
       sudo rm -rf "$file"
     fi
   done
+}
+
+# Get ssh keys
+get_ssh_keys() {
+  folder=~/Lab/get-ssh-keys-from-1password
+
+  if [ ! -d "$folder" ]; then
+    git clone git@github.com:bdumas1/get-ssh-keys-from-1password.git "$folder"
+  fi
+
+  cd "$folder" && ./install && cd -
 }
 
 # Install programs
