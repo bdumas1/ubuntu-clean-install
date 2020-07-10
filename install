@@ -7,8 +7,6 @@ set -o errexit
 set -o nounset
 
 init() {
-  remove_sources_list_files
-
   sudo apt update -y
   sudo apt upgrade -y
   
@@ -19,20 +17,6 @@ init() {
   ./actions/change_shell_to_zsh
   ./actions/update_hosts_file
 }
-
-# Remove some sources list files if exists
-remove_sources_list_files() {
-  FILES=(
-    "/etc/apt/sources.list.d/spotify.list"
-    "/etc/apt/sources.list.d/spotify.list.save"
-  )
-
-  for file in "${FILES[@]}"; do
-    if [ -f "$file" ]; then
-      sudo rm -rf "$file"
-    fi
-  done
-} 
 
 # Install programs
 install_programs() {

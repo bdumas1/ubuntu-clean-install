@@ -3,8 +3,11 @@
 get_ssh_keys_from_1password_repo="git clone git@github.com:bdumas1/get-ssh-keys-from-1password.git"
 get_ssh_keys_from_1password_folder=~/Lab/get-ssh-keys-from-1password
 
-if [ ! -d "$get_ssh_keys_from_1password_folder" ]; then
-  git clone $get_ssh_keys_from_1password_repo "$get_ssh_keys_from_1password_folder"
+if [ ! -d "${get_ssh_keys_from_1password_folder}" ]; then
+  git clone ${get_ssh_keys_from_1password_repo} "${get_ssh_keys_from_1password_folder}"
 fi
 
-cd "$folder" && ./install && cd -
+(
+  cd "${get_ssh_keys_from_1password_folder}"
+  ./install
+)

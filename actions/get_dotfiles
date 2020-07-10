@@ -4,12 +4,13 @@ dotfiles_repo="git@github.com:bdumas1/dotfiles.git"
 dotfiles_folder="dotfiles"
 lab_folder=~/Lab
 
-if [ ! -d "$lab_folder"/"$dotfiles_folder" ]; then
-  mkdir -p "$lab_folder"
-  git clone $dotfiles_repo "$lab_folder"/"$dotfiles_folder"
-  cd $dotfiles_folder
-  ./install
-  cd -
+if [ ! -d "${lab_folder}"/"${dotfiles_folder}" ]; then
+  mkdir -p "${lab_folder}"
+  git clone ${dotfiles_repo} "${lab_folder}"/"${dotfiles_folder}"
+  (
+    cd "${dotfiles_folder}"
+    ./install
+  )
 fi
 
 ./bin/success "Dotfiles have been installed."
