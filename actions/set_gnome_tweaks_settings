@@ -4,11 +4,7 @@
 dash_to_dock_dir=~/Lab/dash-to-dock
 dash_to_dock_tag="gnome-3.20"
 if [ ! -d "${dash_to_dock_dir}" ]; then
-  git clone https://github.com/micheleg/dash-to-dock.git "${dash_to_dock_dir}"
-  (
-    cd "${dash_to_dock_dir}"
-    git checkout ${dash_to_dock_tag}
-  ) 
+  git clone -b ${dash_to_dock_tag} https://github.com/micheleg/dash-to-dock.git "${dash_to_dock_dir}" 
   ./bin/success "'Dash to dock' has been installed with branch $dash_to_dock_tag"
 fi
 
