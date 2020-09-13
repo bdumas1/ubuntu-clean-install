@@ -26,9 +26,11 @@ gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 40
 gsettings set org.gnome.shell.extensions.dash-to-dock height-fraction 0.9
 gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size 40
 gsettings set org.gnome.shell.extensions.dash-to-dock show-show-apps-button false
+gsettings set org.gnome.shell.extensions.dash-to-dock dock-fixed true
+gsettings set org.gnome.shell.extensions.dash-to-dock custom-theme-shrink true
 
 gsettings set org.gnome.desktop.session idle-delay 'uint32 0'
 
-gsettings set org.gnome.nautilus.desktop trash-icon-visible false
+#gsettings set org.gnome.nautilus.desktop trash-icon-visible false
 
 ./bin/success "All gnome tweaks settings have been installed."
