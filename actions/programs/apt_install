@@ -29,6 +29,7 @@ install git
 install wget
 install rsync
 install zip
+install make
 
 # LAMP
 install apache2
