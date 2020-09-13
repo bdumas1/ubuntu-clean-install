@@ -30,6 +30,7 @@ install wget
 install rsync
 install zip
 install make
+install gettext
 
 # LAMP
 install apache2
