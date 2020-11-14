@@ -33,4 +33,9 @@ gsettings set org.gnome.desktop.session idle-delay 'uint32 0'
 
 #gsettings set org.gnome.nautilus.desktop trash-icon-visible false
 
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-1 "['<Super>ampersand']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-2 "['<Super>eacute']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-3 "['<Super>quotedbl']"
+gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-4 "['<Super>apostrophe']"
+
 ./bin/success "All gnome tweaks settings have been installed."
