@@ -12,13 +12,17 @@ install() {
   fi
 }
 
-install curl
-
 # Nextcloud source
 sudo add-apt-repository ppa:nextcloud-devs/client
 
+# Brave source
+install apt-transport-https curl gnupg
+curl -s https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key --keyring /etc/apt/trusted.gpg.d/brave-browser-release.gpg add -
+echo "deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+
 sudo apt update -y
 
+install curl
 install zsh
 install vim
 install git
@@ -49,3 +53,4 @@ install spotify-client
 install nextcloud-client
 install nextcloud-client-nautilus
 install stacer
+install brave-browser
