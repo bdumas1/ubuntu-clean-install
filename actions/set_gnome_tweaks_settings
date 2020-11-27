@@ -13,6 +13,19 @@ if [ ! -d "${dash_to_dock_dir}" ]; then
   ./bin/success "'Dash to dock' has been installed with branch $dash_to_dock_tag"
 fi
 
+# Install Multi Monitors
+# https://github.com/spin83/multi-monitors-add-on
+multi_monitor_dir=~/Lab/multi-monitors-add-on
+multi_monitor_tag="gnome-3-32_3-36"
+if [ ! -d "${multi_monitor_dir}" ]; then
+  git clone -b ${multi_monitor_tag} git://github.com/spin83/multi-monitors-add-on.git "${multi_monitor_dir}" 
+  (
+    cd "${multi_monitor_dir}"
+    cp -r multi-monitors-add-on@spin83 ~/.local/share/gnome-shell/extensions/
+  )
+  ./bin/success "'Multi Monitors' has been installed with branch $multi_monitor_tag"
+fi
+
 # Set settings
 gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 gsettings set org.gnome.desktop.interface show-battery-percentage true
