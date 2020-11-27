@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Install dash to dock
-dash_to_dock_dir=~/Lab/dash-to-dock
+dash_to_dock_dir=~/Lab/gnome-extensions/dash-to-dock
 dash_to_dock_tag="gnome-3-36"
 if [ ! -d "${dash_to_dock_dir}" ]; then
   git clone -b ${dash_to_dock_tag} https://github.com/micheleg/dash-to-dock.git "${dash_to_dock_dir}" 
@@ -15,7 +15,7 @@ fi
 
 # Install Multi Monitors
 # https://github.com/spin83/multi-monitors-add-on
-multi_monitor_dir=~/Lab/multi-monitors-add-on
+multi_monitor_dir=~/Lab/gnome-extensions/multi-monitors-add-on
 multi_monitor_tag="gnome-3-32_3-36"
 if [ ! -d "${multi_monitor_dir}" ]; then
   git clone -b ${multi_monitor_tag} git://github.com/spin83/multi-monitors-add-on.git "${multi_monitor_dir}" 
