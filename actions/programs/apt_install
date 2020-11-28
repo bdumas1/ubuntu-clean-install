@@ -54,3 +54,4 @@ install nextcloud-client
 install nextcloud-client-nautilus
 install stacer
 install brave-browser
+install indicator-multiload
