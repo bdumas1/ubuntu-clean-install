@@ -25,6 +25,7 @@ sudo apt update -y
 install curl
 install zsh
 install vim
+install vim-gtk
 install git
 install wget
 install rsync
