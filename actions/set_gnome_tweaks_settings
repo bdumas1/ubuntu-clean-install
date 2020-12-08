@@ -56,5 +56,6 @@ gsettings set org.gnome.mutter.keybindings toggle-tiled-right "['<Alt><Super>Rig
 gsettings set org.gnome.desktop.wm.keybindings maximize "['<Alt><Super>f']"
 gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-right "['<Primary><Alt><Super>Right']"
 gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-left "['<Primary><Alt><Super>Left']"
+gsettings set org.gnome.desktop.wm.keybindings close "['<Primary>q']"
 
 ./bin/success "All gnome tweaks settings have been installed."
