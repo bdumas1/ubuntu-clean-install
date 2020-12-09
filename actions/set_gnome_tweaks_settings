@@ -58,4 +58,6 @@ gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-right "['<Primary
 gsettings set org.gnome.desktop.wm.keybindings move-to-monitor-left "['<Primary><Alt><Super>Left']"
 gsettings set org.gnome.desktop.wm.keybindings close "['<Primary>q']"
 
+gsettings set org.gnome.shell.keybindings toggle-overview "['<Primary>Up']"
+
 ./bin/success "All gnome tweaks settings have been installed."
