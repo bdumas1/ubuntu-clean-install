@@ -56,3 +56,4 @@ install nextcloud-client-nautilus
 install stacer
 install brave-browser
 install indicator-multiload
+install gnome-contacts
