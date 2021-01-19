@@ -14,6 +14,7 @@ install() {
 
 install zoom-client
 install spotify
+install signal-desktop
 
 install code --classic
 install slack --classic
