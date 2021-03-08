@@ -11,17 +11,11 @@ init() {
   sudo apt upgrade -y
   
   ./actions/get_ssh_keys
-  install_programs
-  ./actions/get_dotfiles
-  ./actions/set_gnome_tweaks_settings
-  ./actions/change_shell_to_zsh
-  ./actions/update_hosts_file
-}
-
-# Install programs
-install_programs() {
   ./actions/programs/apt_install
   ./actions/programs/snap_install
+  ./actions/get_dotfiles
+  # ./actions/set_gnome_tweaks_settings
+  ./actions/change_shell_to_zsh
 
   # Install NVM
   wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install | bash
