@@ -13,6 +13,7 @@ init() {
   ./actions/get_ssh_keys
   ./actions/programs/apt_install
   ./actions/programs/snap_install
+  ./actions/programs/i3_install
   ./actions/get_dotfiles
   # ./actions/set_gnome_tweaks_settings
   ./actions/change_shell_to_zsh
