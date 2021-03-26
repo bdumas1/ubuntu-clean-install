@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-sudo apt install -y i3 rofi lxappearance playerctl xbrightlight maim xclip blueman feh i3lock-fancy libpam0g-dev libx11-xcb-dev
+sudo apt install -y i3 rofi lxappearance playerctl xbrightlight maim xclip blueman feh libpam0g-dev libx11-xcb-dev
 
 # i3-gaps
 sudo add-apt-repository ppa:kgilmer/speed-ricer && apt update && apt install -y i3-gaps
