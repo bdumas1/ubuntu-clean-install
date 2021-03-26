@@ -47,3 +47,4 @@ install terminator
 install nextcloud-client
 install nextcloud-client-nautilus
 install gnome-contacts
+install ranger
