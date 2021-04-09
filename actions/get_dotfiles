@@ -2,7 +2,7 @@
 
 dotfiles_repo="git@github.com:bdumas1/dotfiles.git"
 dotfiles_folder="dotfiles"
-lab_folder=~/Lab
+lab_folder=~/Lab/github
 
 if [ ! -d "${lab_folder}"/"${dotfiles_folder}" ]; then
   mkdir -p "${lab_folder}"
