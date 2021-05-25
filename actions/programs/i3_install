@@ -32,3 +32,4 @@ git clone https://github.com/deuill/i3-gnome-flashback.git "${GITHUB_DIR}"/i3-gn
   sudo make install
 )
 gsettings set org.gnome.gnome-flashback desktop false
+gsettings set org.gnome.gnome-flashback status-notifier-watcher false
