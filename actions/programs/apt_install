@@ -27,6 +27,7 @@ install rsync
 install zip
 install make
 install gettext
+install gnome-tweaks
 
 # LAMP
 install apache2
