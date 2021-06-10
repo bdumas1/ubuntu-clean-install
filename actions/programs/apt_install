@@ -28,6 +28,7 @@ install zip
 install make
 install gettext
 install gnome-tweaks
+install gnome-screensaver
 
 # LAMP
 install apache2
