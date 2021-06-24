@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+op_version="1.10.3"
+op_directory="op_download"
+zip_filename="op_linux_amd64_v"${op_version}".zip"
+
+# Download 1password command line (op) and move it to PATH
+download_op() {
+  wget $1
+  unzip -d ${op_directory} ${zip_filename}
+  rm ${zip_filename}
+  sudo mv "${op_directory}"/op /usr/local/bin
+  rm -rf ${op_directory}
+}
+
+# GET 1password command line with update check
+get_op() {
+  if ! [ -x "$(command -v op)" ]; then
+    download_op https://cache.agilebits.com/dist/1P/op/pkg/v"${op_version}"/"${zip_filename}"
+  fi
+}
+
+# Sign in to 1password command line
+op_on() {
+  eval $(op signin my)
+}
+
+# Sign out to 1password command line
+op_off() {
+  op signout
+  unset OP_SESSION_my
+}
+
+$@

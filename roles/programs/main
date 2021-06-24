@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+./apt
+./snap
+./i3/install

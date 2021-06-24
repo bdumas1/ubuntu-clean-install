@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+sudo add-apt-repository ppa:kgilmer/speed-ricer && apt update && apt install -y i3-gaps
