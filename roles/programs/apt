@@ -30,6 +30,7 @@ install gettext
 install gnome-tweaks
 install gnome-screensaver
 install nfs-common
+install fonts-powerline
 
 # LAMP
 install apache2
