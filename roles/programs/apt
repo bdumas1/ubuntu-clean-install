@@ -33,20 +33,6 @@ install gnome-screensaver
 install nfs-common
 install fonts-powerline
 
-# LAMP
-install apache2
-install php
-install libapache2-mod-php
-install mysql-server
-install php-mysql
-install php-curl
-install php-gd
-install php-intl
-install php-json
-install php-mbstring
-install php-xml
-install php-zip
-
 # Apps
 install terminator
 install nextcloud-client
