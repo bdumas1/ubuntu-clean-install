@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-git clone https://github.com/deuill/i3-gnome-flashback.git "${GITHUB_DIR}"/i3-gnome-flashback
+sudo apt install -y gnome-flashback
+git clone https://github.com/regolith-linux/i3-gnome-flashback.git "${GITHUB_DIR}"/i3-gnome-flashback
 (
   cd "${GITHUB_DIR}"/i3-gnome-flashback
   sudo make install

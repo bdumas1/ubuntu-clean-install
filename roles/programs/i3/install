@@ -2,9 +2,10 @@
 
 export GITHUB_DIR=~/Lab/github
 
-sudo apt install -y i3 rofi lxappearance playerctl xbrightlight maim xclip blueman feh libpam0g-dev libx11-xcb-dev
+sudo apt install -y i3 rofi playerctl feh
+#sudo apt install -y i3 rofi lxappearance playerctl xbrightlight maim xclip blueman feh libpam0g-dev libx11-xcb-dev
 
 ./i3/i3gaps
 ./i3/polybar
-./i3/dunst
+#./i3/dunst
 ./i3/i3gnomeflashback

@@ -12,9 +12,6 @@ install() {
   fi
 }
 
-# Nextcloud source
-sudo add-apt-repository ppa:nextcloud-devs/client
-
 sudo apt update -y
 
 install curl
@@ -23,18 +20,19 @@ install vim
 install neovim
 install vim-gtk
 install git
-install wget
-install rsync
-install zip
 install make
-install gettext
-install gnome-tweaks
+install jq
+build-essential
+#install gnome-tweaks
 install gnome-screensaver
-install nfs-common
-install fonts-powerline
+#install fonts-powerline
+install fonts-font-awesome
+
+# FZF
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
 
 # Apps
 install terminator
-install nextcloud-client
-install nextcloud-client-nautilus
+install nextcloud-desktop
 install ranger

@@ -12,6 +12,4 @@ install() {
   fi
 }
 
-install zoom-client
 install spotify
-install code --classic
