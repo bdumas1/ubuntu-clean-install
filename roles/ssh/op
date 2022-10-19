@@ -1,28 +1,33 @@
 #!/usr/bin/env bash
 
-op_version="1.10.3"
-op_directory="op_download"
-zip_filename="op_linux_amd64_v"${op_version}".zip"
-
-# Download 1password command line (op) and move it to PATH
 download_op() {
-  wget $1
-  unzip -d ${op_directory} ${zip_filename}
-  rm ${zip_filename}
-  sudo mv "${op_directory}"/op /usr/local/bin
-  rm -rf ${op_directory}
+  curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
+    sudo gpg --dearmor --output /usr/share/keyrings/1password-archive-keyring.gpg
+
+  echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/1password-archive-keyring.gpg] https://downloads.1password.com/linux/debian/$(dpkg --print-architecture) stable main" |
+    sudo tee /etc/apt/sources.list.d/1password.list
+
+  sudo mkdir -p /etc/debsig/policies/AC2D62742012EA22/
+  curl -sS https://downloads.1password.com/linux/debian/debsig/1password.pol | \
+    sudo tee /etc/debsig/policies/AC2D62742012EA22/1password.pol
+  sudo mkdir -p /usr/share/debsig/keyrings/AC2D62742012EA22
+  curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
+    sudo gpg --dearmor --output /usr/share/debsig/keyrings/AC2D62742012EA22/debsig.gpg
+
+  sudo apt update && sudo apt install 1password-cli
+
+  op --version
 }
 
-# GET 1password command line with update check
 get_op() {
   if ! [ -x "$(command -v op)" ]; then
-    download_op https://cache.agilebits.com/dist/1P/op/pkg/v"${op_version}"/"${zip_filename}"
+    download_op
   fi
 }
 
 # Sign in to 1password command line
 op_on() {
-  eval $(op signin my)
+  eval $(op signin)
 }
 
 # Sign out to 1password command line
