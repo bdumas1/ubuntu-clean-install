@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-./apt
-./snap
-./i3/install
+./roles/programs/apt
+./roles/programs/snap
+./roles/programs/i3/install
