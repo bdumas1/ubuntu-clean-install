@@ -25,11 +25,6 @@ get_op() {
   fi
 }
 
-# Sign in to 1password command line
-op_on() {
-  eval $(op signin)
-}
-
 # Sign out to 1password command line
 op_off() {
   op signout

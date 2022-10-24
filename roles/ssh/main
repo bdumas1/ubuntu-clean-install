@@ -7,19 +7,17 @@ sudo chmod 700 "${ssh_dir}"
 sudo chown $(whoami) "${ssh_dir}" 
 
 if [ ! -f ${ssh_dir}/id_rsa ] && [ ! -f ${ssh_dir}/id_rsa.pub ]; then
-  ./op get_op
+  ./bin/op get_op
 
   read -p "What's your 1password account email address: " email_address
 
-  op signin my.1password.com "${email_address}"
-
-  ./op op_on
+  eval $(op account add --address my.1password.com --email "${email_address}" --signin)
 
   # Get public/private keys
   read -p "What's the document name of 'id_rsa' you want to get from 1password: " onepassword_id_rsa
   read -p "What's the document name of 'id_rsa.pub' you want to get from 1password: " onepassword_id_rsa_pub
-  op document "${onepassword_id_rsa}" > "${ssh_dir}"/id_rsa
-  op document "${onepassword_id_rsa_pub}" > "${ssh_dir}"/id_rsa.pub
+  op document get "${onepassword_id_rsa}" > "${ssh_dir}"/id_rsa
+  op document get "${onepassword_id_rsa_pub}" > "${ssh_dir}"/id_rsa.pub
   chmod 600 "${ssh_dir}"/id_rsa
   chmod 600 "${ssh_dir}"/id_rsa.pub
 
