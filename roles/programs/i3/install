@@ -2,7 +2,7 @@
 
 export GITHUB_DIR=~/Lab/github
 
-sudo apt install -y i3 rofi playerctl feh
+sudo apt install -y i3 rofi playerctl feh maim
 #sudo apt install -y i3 rofi lxappearance playerctl xbrightlight maim xclip blueman feh libpam0g-dev libx11-xcb-dev
 
 ./roles/programs/i3/i3gaps
