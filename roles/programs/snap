@@ -13,3 +13,8 @@ install() {
 }
 
 install spotify
+install discord
+install slack
+install teams-for-linux
+install vlc
+install chromium
