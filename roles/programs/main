@@ -2,4 +2,4 @@
 
 ./roles/programs/apt
 ./roles/programs/snap
-./roles/programs/i3/install
+#./roles/programs/i3/install
