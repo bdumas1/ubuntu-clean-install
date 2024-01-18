@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := help
 
 .PHONY:
-apply: ## Play all roles
+install: ## Play all roles
 	./install
 
 help: ## This help
