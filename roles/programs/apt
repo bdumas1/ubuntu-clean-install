@@ -22,12 +22,18 @@ install vim-gtk
 install git
 install make
 install jq
+install ripgrep
 build-essential
 install gnome-tweaks
 install gnome-screensaver
+install gnome-shell-extension-manager
+
+# Fonts
 install fonts-powerline
 install fonts-font-awesome
-install gnome-shell-extension-manager
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/JetBrainsMono.zip -O /tmp/JetBrainsMono.zip
+unzip /tmp/JetBrainsMono.zip -d ~/.fonts
+fc-cache -fv
 
 # FZF
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
